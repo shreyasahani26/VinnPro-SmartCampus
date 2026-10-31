@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block title %}{{ code }} · VINNPRO{% endblock %}{% block section %}Error{% endblock %}
+{% block content %}<div class="empty-state error-page"><span class="error-code">{{ code }}</span><h1>That didn't go as planned.</h1><p>{{ message }}</p><a class="btn btn-primary" href="{{ url_for('dashboard') if current_user else url_for('login') }}">Back to safety</a></div>{% endblock %}

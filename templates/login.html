@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Sign in · VINNPRO{% endblock %}
+{% block auth_content %}
+<div class="auth-card"><div class="auth-kicker"><span class="pulse"></span> CAMPUS WORKSPACE</div><h1>Welcome back.</h1><p class="muted">Sign in to manage your campus operations.</p>
+<form method="post" class="form-stack">
+<label>Email address<input type="email" name="email" placeholder="you@university.edu" autocomplete="email" required></label>
+<label>Password<input type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required></label>
+<button class="btn btn-primary full-width" type="submit">Sign in <span>→</span></button>
+</form><div class="auth-switch">New to VINNPRO? <a href="{{ url_for('register') }}">Create an account</a></div>
+<div class="auth-note">Public registration is enabled. Your workspace data is stored in the application database.</div></div>
+{% endblock %}

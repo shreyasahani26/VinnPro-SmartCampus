@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Create account · VINNPRO{% endblock %}
+{% block auth_content %}
+<div class="auth-card"><div class="auth-kicker"><span class="pulse"></span> GET STARTED</div><h1>Create your account.</h1><p class="muted">Set up your campus workspace in a few steps.</p>
+<form method="post" class="form-stack">
+<label>Full name<input type="text" name="name" placeholder="Your name" autocomplete="name" maxlength="100" required></label>
+<label>Email address<input type="email" name="email" placeholder="you@university.edu" autocomplete="email" maxlength="254" required></label>
+<label>Password <small class="inline-hint">At least 8 characters</small><input type="password" name="password" placeholder="Create a strong password" autocomplete="new-password" minlength="8" required></label>
+<button class="btn btn-primary full-width" type="submit">Create account <span>→</span></button>
+</form><div class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></div>
+<div class="auth-note">Use an email you control. Passwords are stored as secure hashes, not plain text.</div></div>
+{% endblock %}

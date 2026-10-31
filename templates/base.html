@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}VINNPRO Campus OS{% endblock %}</title>
+  <meta name="description" content="Responsive campus operations dashboard for students, attendance, faculty and reports.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+{% if current_user %}
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">V</span><span>VINNPRO<small>Campus OS Pro</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav">
+      <a class="{{ 'active' if request.endpoint == 'dashboard' }}" href="{{ url_for('dashboard') }}"><span>▦</span> Overview</a>
+      <a class="{{ 'active' if request.endpoint == 'students' }}" href="{{ url_for('students') }}"><span>♙</span> Students</a>
+      <a class="{{ 'active' if request.endpoint == 'attendance' }}" href="{{ url_for('attendance') }}"><span>◷</span> Attendance</a>
+      <a class="{{ 'active' if request.endpoint == 'timetable' }}" href="{{ url_for('timetable') }}"><span>▤</span> Timetable</a>
+      <a class="{{ 'active' if request.endpoint == 'faculty' }}" href="{{ url_for('faculty') }}"><span>♧</span> Faculty & workload</a>
+      <a class="{{ 'active' if request.endpoint in ['reports','export_report'] }}" href="{{ url_for('reports') }}"><span>▥</span> Reports & insights</a>
+      <a class="{{ 'active' if request.endpoint == 'assistant' }}" href="{{ url_for('assistant') }}"><span>✧</span> Campus assistant</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="status-pill"><span class="pulse"></span> System operational</div>
+      <div class="user-card"><div class="avatar">{{ current_user[:1]|upper }}</div><div class="user-meta"><strong>{{ current_user }}</strong><small>Campus workspace</small></div>
+      <form method="post" action="{{ url_for('logout') }}"><button class="icon-button" type="submit" title="Log out" aria-label="Log out">↪</button></form></div>
+    </div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <button class="icon-button menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+      <div class="breadcrumb">Workspace <span>/</span> <strong>{% block section %}Overview{% endblock %}</strong></div>
+      <div class="top-actions"><span class="date-chip">{{ today }}</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light theme"><span id="themeIcon">☀</span><span id="themeText">Light mode</span></button>
+      <form method="post" action="{{ url_for('logout') }}" class="logout-mobile"><button class="icon-button" type="submit" title="Log out" aria-label="Log out">↪</button></form></div>
+    </header>
+    <div class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-stack">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}<button type="button" class="flash-close" onclick="this.parentElement.remove()">×</button></div>{% endfor %}</div>{% endif %}{% endwith %}
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+{% else %}
+<div class="auth-wrap"><div class="auth-top"><a class="brand" href="{{ url_for('login') }}"><span class="brand-mark">V</span><span>VINNPRO<small>Campus OS Pro</small></span></a><button class="theme-toggle" id="themeToggle" type="button"><span id="themeIcon">☀</span><span id="themeText">Light mode</span></button></div>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-stack auth-flashes">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}<button type="button" class="flash-close" onclick="this.parentElement.remove()">×</button></div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block auth_content %}{% endblock %}<p class="auth-footer">VINNPRO Campus OS Pro · Campus operations, connected.</p></div>
+{% endif %}
+</body></html>
