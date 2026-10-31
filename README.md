@@ -72,3 +72,26 @@ The dashboard numbers and reports are calculated from the SQLite database. The a
 - This starter app does not yet include email verification, password reset, role-based permissions, or full CSRF protection. Add these before using it for sensitive institutional records.
 - Public signup means anyone can create an account. In this starter version, authenticated users share the same campus data. For real multi-tenant usage, add per-workspace data ownership and authorization before deploying with sensitive data.
 - The included campus assistant is rule-based and database-backed, not an external generative AI model.
+- # VinnPro SmartCampus
+
+**Live Demo:** https://vinnpro-smartcampus.onrender.com
+
+An intelligent campus management platform built using Python, Flask, HTML, CSS, and JavaScript.
+
+## Features
+
+* Student and faculty management
+* Attendance tracking
+* Academic timetable
+* Dashboard and reports
+* Responsive interface with dark/light mode
+* Campus assistant
+
+## Technology Stack
+
+* Python and Flask
+* SQLite
+* HTML, CSS, and JavaScript
+* Gunicorn
+* Render for deployment
+
